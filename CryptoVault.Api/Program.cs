@@ -21,6 +21,19 @@ builder.Services.AddScoped<ITotpService, TotpService>();
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var secretKey = Encoding.UTF8.GetBytes(jwtSettings["Secret"]!);
 
+// Registrar Servicios Criptográficos e IAM
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<ITotpService, TotpService>();
+builder.Services.AddScoped<IEncryptionService, EncryptionService>();
+
+// Registrar Servicios Criptográficos e IAM
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<ITotpService, TotpService>();
+builder.Services.AddScoped<IEncryptionService, EncryptionService>();
+builder.Services.AddScoped<IIntegrityService, IntegrityService>(); // <- Inclusión del nuevo servicio
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
